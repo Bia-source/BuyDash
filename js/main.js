@@ -33,5 +33,15 @@ function formatValue(value){
     str = "$ " + str;
     return str;
 }
+
+function addData(){
+  let desc = document.getElementById("desc").value;
+  let value = document.getElementById("value").value;
+  let amount = document.getElementById("amount").value;
+
+  list.unshift({"desc":desc,"value":value,"amount":amount});
+  setList(list);
+}
+
 setList(list);
 console.log(getTotal(list));
