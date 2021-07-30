@@ -9,7 +9,7 @@ function getTotal(list){
     list.forEach(item => {
         total += item.value * item.amount;
     }) 
-    return total;
+    document.getElementById("totalValue").innerHTML = formatValue(total);
 }
 
 function setList(list){
@@ -21,7 +21,7 @@ function setList(list){
         })
     table += '</tbody>';
     document.getElementById("listTable").innerHTML = table;
-    
+    getTotal(list);
 }
 
 function formatAmount(amount){
@@ -132,4 +132,4 @@ function deleteData(id){
 }
 
 setList(list);
-console.log(getTotal(list));
+
