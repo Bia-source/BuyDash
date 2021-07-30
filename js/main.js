@@ -17,7 +17,7 @@ function setList(list){
     list.forEach(item => {
         table += `<tr><td>${formatDesc(item.desc)}</td><td>${item.amount}</td><td>${formatValue(item.value)}</td><td>
         <button onclick="setUpdate(${list.indexOf(item)})" class="btn btn-default"><i class="bi bi-pencil-square"></i></button> | 
-        <button class="btn btn-default"><i class="bi bi-x-square"></i></button></td></tr>`
+        <button onclick="deleteData(${list.indexOf(item)})" class="btn btn-default"><i class="bi bi-x-square"></i></button></td></tr>`
         })
     table += '</tbody>';
     document.getElementById("listTable").innerHTML = table;
@@ -76,6 +76,13 @@ function updateData(){
     list[id] = { "desc": desc, "amount": amount, "value": value};
     resetForm();
     setList(list);
+}
+
+function deleteData(id){
+   if(confirm("Delete this item?")){
+       list.splice(id,1);
+       setList(list);
+   }
 }
 
 setList(list);
