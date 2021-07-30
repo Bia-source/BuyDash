@@ -21,10 +21,10 @@
           <div class="form-group col-2">
               <input type="text" class="form-control" id="desc" placeholder="Description"/>
           </div>
-          <div class="form-group col-2">
+          <div class="form-group col-1">
             <input type="text" class="form-control" id="amount" placeholder="Amount"/>
           </div>
-          <div class="form-group col-2">
+          <div class="form-group col-1">
             <input type="text" class="form-control" id="value" placeholder="Value"/>
           </div>
           <span id="btnUpdate" class="col-3" style="display: none;">
@@ -32,7 +32,12 @@
             <button onclick="updateData()" class="btn btn-success col-4">Save</button>
             <button onclick="resetForm()" class="btn btn-danger col-4">Cancel</button>
           </span>
-          <button id="btnAdd" onclick="addData()" class="btn btn-info col-1">Add</button>
+          <span id="btnAdd" class="col-3">
+            <button onclick="addData()" class="btn btn-info col-2">Add</button>
+            <button onclick="resetForm()" class="btn btn-warning col-3">Reset</button>
+            <button onclick="deleteList()" class="btn btn-danger col-4">Delete list</button>
+          </span>
+          
         </div>
           
         <div style="margin-top:1%"></div>
@@ -42,7 +47,7 @@
         </table>
     </div>
 
-    <nav class="navbar navbar-default navbar-fixed-bottom">
+    <nav class="navbar navbar-dark bg-dark fixed-bottom">
         <div class="container">
             <h4 class="text-center text-success"> Total: <span id="totalValue">$ 0,00</span></h4>
         </div>    
