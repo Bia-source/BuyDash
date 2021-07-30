@@ -2,6 +2,7 @@ var list = [
     {"desc": "rice", "amount": "1", "value": "5.40"},
     {"desc": "beer", "amount": "12", "value": "1.99"},
     {"desc": "meat", "amount": "1", "value": "15.00"},
+    {"desc": "meat", "amount": "1", "value": "15.00"},
 ];
 
 function getTotal(list){
@@ -22,6 +23,7 @@ function setList(list){
     table += '</tbody>';
     document.getElementById("listTable").innerHTML = table;
     getTotal(list);
+    saveListStorage(list);
 }
 
 function formatAmount(amount){
@@ -138,5 +140,19 @@ function deleteList(){
     }
 }
 
+function saveListStorage(list){
+    var jsonStr = JSON.stringify(list);
+    localStorage.setItem("list", jsonStr);
+}
+
+function initListStorage(){
+  var testeList = localStorage.getItem("list");
+  if(testeList){
+      var newList = JSON.parse(testeList);   
+  }
+  setList(newList);
+}
+
 setList(list);
+initListStorage();
 
