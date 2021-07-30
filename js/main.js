@@ -17,7 +17,7 @@ function setList(list){
     list.forEach(item => {
         table += `<tr><td>${formatDesc(item.desc)}</td><td>${item.amount}</td><td>${formatValue(item.value)}</td><td>
         <button onclick="setUpdate(${list.indexOf(item)})" class="btn btn-default"><i class="bi bi-pencil-square"></i></button> | 
-        <button onclick="resetForm()" class="btn btn-default"><i class="bi bi-x-square"></i></button></td></tr>`
+        <button class="btn btn-default"><i class="bi bi-x-square"></i></button></td></tr>`
         })
     table += '</tbody>';
     document.getElementById("listTable").innerHTML = table;
@@ -53,6 +53,8 @@ function setUpdate(id){
     document.getElementById("amount").value = obj.amount;
     document.getElementById("btnUpdate").style.display = "inline-block";
     document.getElementById("btnAdd").style.display = "none";
+
+    document.getElementById("inputIdUpdate").innerHTML = `<input id="idUpdate" type="hidden" value="${id}">`;
 }
 
 function resetForm(){
@@ -61,6 +63,19 @@ function resetForm(){
     document.getElementById("amount").value = "";
     document.getElementById("btnUpdate").style.display = "none";
     document.getElementById("btnAdd").style.display = "inline-block";
+
+    document.getElementById("inputIdUpdate").innerHTML = "";
+}
+
+function updateData(){
+    let id = document.getElementById("idUpdate").value;
+    let desc = document.getElementById("desc").value;
+    let amount = document.getElementById("amount").value;
+    let value = document.getElementById("value").value;
+
+    list[id] = { "desc": desc, "amount": amount, "value": value};
+    resetForm();
+    setList(list);
 }
 
 setList(list);
