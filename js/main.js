@@ -15,13 +15,17 @@ function getTotal(list){
 function setList(list){
     let table = '<thead><tr><td>Description</td><td>Amount</td><td>Value</td><td>Action</td></tr></thead>';
     list.forEach(item => {
-        table += `<tr><td>${formatDesc(item.desc)}</td><td>${item.amount}</td><td>${formatValue(item.value)}</td><td>
+        table += `<tr><td>${formatDesc(item.desc)}</td><td>${formatAmount(item.amount)}</td><td>${formatValue(item.value)}</td><td>
         <button onclick="setUpdate(${list.indexOf(item)})" class="btn btn-default"><i class="bi bi-pencil-square"></i></button> | 
         <button onclick="deleteData(${list.indexOf(item)})" class="btn btn-default"><i class="bi bi-x-square"></i></button></td></tr>`
         })
     table += '</tbody>';
     document.getElementById("listTable").innerHTML = table;
     
+}
+
+function formatAmount(amount){
+    return parseInt(amount);
 }
 
 function formatDesc(desc){
@@ -37,7 +41,45 @@ function formatValue(value){
     return str;
 }
 
+function validation(){
+  let desc = document.getElementById("desc").value;
+  let value = document.getElementById("value").value;
+  let amount = document.getElementById("amount").value;
+  var errors = "";
+  document.getElementById("errors").style.display = "none"
+
+  value = parseFloat(value);
+  if(desc === ""){
+      errors += `<p>Fill out description</p>`
+  }
+  if(amount === ""){
+      errors += `<p>Fill out a quantity</p>`
+  }else if(amount != parseInt(amount)){
+    errors += `<p>Fill out a valid amount</p>`
+  }
+  if(value === ""){
+    errors += `<p>Fill out a value</p>`
+  }else if(value != parseFloat(value)){
+    errors += `<p>Fill out a valid value</p>`
+  }
+  if(errors != ""){
+      document.getElementById("errors").style.display = "block"
+      document.getElementById("errors").style.backgroundColor = "rgba(85,85,85,0.3)"
+      document.getElementById("errors").style.color = "white"
+      document.getElementById("errors").style.padding = "10px"
+      document.getElementById("errors").style.margin = "10px"
+      document.getElementById("errors").style.borderRadius= "13px"
+      document.getElementById("errors").innerHTML = "<h3>Error:</h3>" + errors;
+      return 0;
+  }else{
+      return 1;
+  }
+}
+
 function addData(){
+    if(!validation()){
+        return;
+    }
   let desc = document.getElementById("desc").value;
   let value = document.getElementById("value").value;
   let amount = document.getElementById("amount").value;
@@ -65,9 +107,13 @@ function resetForm(){
     document.getElementById("btnAdd").style.display = "inline-block";
 
     document.getElementById("inputIdUpdate").innerHTML = "";
+    document.getElementById("errors").style.display = "none"
 }
 
 function updateData(){
+    if(!validation()){
+        return;
+    }
     let id = document.getElementById("idUpdate").value;
     let desc = document.getElementById("desc").value;
     let amount = document.getElementById("amount").value;
